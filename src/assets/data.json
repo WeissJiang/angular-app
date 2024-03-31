@@ -1,0 +1,17 @@
+[
+    {
+        "wishText": "To learn Angular",
+        "dueDate": 1711845237083,
+        "isComplete": false
+    },
+    {
+        "wishText": "Get A cup of Coffee",
+        "dueDate": 1711845237083,
+        "isComplete": true
+    },
+    {
+        "wishText": "Learn to operate data from local jsons",
+        "dueDate": 1711845237083,
+        "isComplete": false
+    }
+]

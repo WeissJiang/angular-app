@@ -1,9 +1,40 @@
-<div class="containers">
-  <div *ngFor="let item of items">
-    <div class="form-check">
-      <label for="" class="form-check-label">
-        <input type="checkbox" type="checkbox"> {{ item.wishText }}
-      </label>
-    </div>
+<div class="container">
+
+  <add-wish-form
+    (addWish)="items.push($event)"
+  >
+  </add-wish-form>
+  <div class="row mt-3 align-items-center justify-content-center">
+    <wish-filter
+      [listFilter]="listFilter"
+      (selectedFilter)="handleFilterChange($event)"
+    ></wish-filter>
+  </div>
+
+  <div class="row mt-3 align-items-center justify-content-center">
+    <wish-list
+      [wishes]="items.filter(this.filter)"
+    ></wish-list>
   </div>
 </div>
+
+<!-- 
+  notes: 
+  if else-if and else block is used in angular template then we can use ng-template directive to define else block.
+  ng-template directive is used to define a template block in angular.
+
+  sample code:
+  <div *ngIf="condition1; else firstElseBlock">
+    This is displayed if condition1 is true.
+  </div>
+
+  <ng-template #firstElseBlock>
+    <div *ngIf="condition2; else secondElseBlock">
+      This is displayed if condition1 is false and condition2 is true.
+    </div>
+  </ng-template>
+
+  <ng-template #secondElseBlock>
+    This is displayed if condition1 is false and condition2 is false.
+  </ng-template>
+ -->
