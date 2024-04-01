@@ -4,19 +4,12 @@
 </ng-template>
 
 <ng-template #showItems>
-    <ul class="col-sm-12 wish-list">
-    <li *ngFor="let item of wishes; index as ii">
-        <div class="form-check">
-        <label for="" class="form-check-label">
-            <input 
-            type="checkbox" 
-            type="checkbox" 
-            [checked]="item.isComplete"
-            [attr.data-index]="ii" 
-            (click)="toggleComplete(item)"
-            > {{ item.wishText }}
-        </label>
-        </div>
-    </li>
+    <ul class="wish-list">
+        <wish-list-item
+            *ngFor="let item of wishes; index as ii"
+            [wishText]="item.wishText"
+            [index]="ii"
+            [(fulfilled)]="item.isComplete"
+        ></wish-list-item>
     </ul>
 </ng-template>

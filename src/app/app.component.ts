@@ -4,9 +4,11 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { WishItem } from '../shared/models/wishItem';
 import { WishListComponent } from './wish-list/wish-list.component';
+import { WishListItemComponent } from './wish-list-item/wish-list-item.component';
 import { AddWishFormComponent } from './add-wish-form/add-wish-form.component';
 import { WishFilterComponent } from './wish-filter/wish-filter.component';
-  
+import EventService from '../shared/services/EventService';
+
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -15,8 +17,9 @@ import { WishFilterComponent } from './wish-filter/wish-filter.component';
     CommonModule,
     FormsModule,
     WishListComponent,
+    WishListItemComponent,
     AddWishFormComponent,
-    WishFilterComponent
+    WishFilterComponent,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
@@ -25,6 +28,10 @@ import { WishFilterComponent } from './wish-filter/wish-filter.component';
 export class AppComponent {
   items: WishItem[] = [
     new WishItem('To learn Angular'),
+    new WishItem('Build Resume using Angular - download resume pdf / import csv'),
+    new WishItem('To learn ASP.NET MVC'),
+    new WishItem('To learn ASP.NET Testing'),
+    new WishItem('To learn Bootstrap'),
     new WishItem('Get A cup of Coffee', true)
   ];
 
@@ -35,7 +42,10 @@ export class AppComponent {
     this.filter = newFilter;
   }
   
-  // get visibleItems(): WishItem[] {
-  //   return this.items.filter(this.filter)
-  // };
+  constructor() {
+    EventService.listen("removeWish", (index: number) => {
+      console.log('removed: ', this.items[index]);
+      this.items.splice(index, 1);
+    })
+  }
 }
